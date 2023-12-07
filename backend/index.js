@@ -18,7 +18,6 @@ app.use(express.json());
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true,
 });
 
 const connection = mongoose.connection;
@@ -31,8 +30,9 @@ connection.once('open', () => {
 const authRouter = require('./routes/auth');
 const linksRouter = require('./routes/links');
 
-app.use('/auth', authRouter);
-app.use('/links', linksRouter);
+// Use appropriate prefixes for your routes
+app.use('/api/auth', authRouter);
+app.use('/api/links', linksRouter);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
